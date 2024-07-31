@@ -17,15 +17,14 @@ app.use(cors())  // This is an middleware
 app.use(express.json());
 
 // CONNECTION TO MONGODB
-try{
-    mongoose.connect(URI, {
-        useNewUrlParser : true,
-        useUnifiedTopology : true
-    });
-    console.log("Connected to MongoDB");
-}catch(error){
-    console.log("Error:", error)
-}
+mongoose.connect('mongodb://localhost:27017/yourDatabaseName', {
+    useNewUrlParser: true, // this option is no longer necessary
+    useUnifiedTopology: true // this option is no longer necessary
+  }).then(() => {
+    console.log('Connected to MongoDB');
+  }).catch(err => {
+    console.error('Failed to connect to MongoDB', err);
+  });
 
 // Defining routes- This route is handled by the getBook function.
 app.use("/book", bookRoute)
